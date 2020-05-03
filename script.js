@@ -37,7 +37,7 @@ function montarCorpoDaPagina(){
                         <div class="card-body" id="card-receita-`+dados[i].id+`">
                             <h5 class="card-title">`+ dados[i].nome +`</h5>
                             <p class="card-text">`+dados[i].descricao+`</p>
-                            <a href="#" class="btn btn-outline-danger" data-toggle="modal" data-target="#modal1">
+                            <a href="#" class="btn btn-outline-danger" onClick="preencherDadosModalDetalhes(`+i+`)">
                                 <b>Leiamais...</b>
                             </a>
                         </div>
@@ -51,5 +51,11 @@ function montarCorpoDaPagina(){
     }
 
     $('#principal').html(view);    
+}
+
+function preencherDadosModalDetalhes(id) {    
+    $('#conteudo-modal').text(dados[id].conteudo);
+    $('#exampleModalCenterTitle').text(dados[id].nome);
+    $('#modal1').modal('show');
 }
 
