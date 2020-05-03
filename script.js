@@ -10,14 +10,46 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
-var ref = database.ref('Receitas');
-ref.on('value', getValue, error);
+ref = database.ref('Receitas');
+ref.on('value', obterDadosReceitas, error);
 
-function getValue(data){
-    console.log(data.val());
+let dados = [];
+
+function obterDadosReceitas(data){
+    dados = data.val();
+    montarCorpoDaPagina();
 }
 
 function error(err){
-    console.log("Erro ao obter dados: " + err);
+    console.log("Erro ao obter dados das receitas: " + err);
+}
+
+function montarCorpoDaPagina(){    
+    var view = '';  
+    for(var i=0; i < dados.length; i++){
+        if(i % 4 === 0){
+            view += `<section class="row card_area">
+                        <div class="row">`
+        }
+
+        view += `<div class="col-12 col-sm-12 col-md-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-body" id="card-receita-`+dados[i].id+`">
+                            <h5 class="card-title">`+ dados[i].nome +`</h5>
+                            <p class="card-text">`+dados[i].descricao+`</p>
+                            <a href="#" class="btn btn-outline-danger" data-toggle="modal" data-target="#modal1">
+                                <b>Leiamais...</b>
+                            </a>
+                        </div>
+                    </div>
+                </div>`
+        
+        if(i % 4 === 3 || i === dados.length - 1){
+            view += `   </div>
+                    </section>`
+        }
+    }
+
+    $('#principal').html(view);    
 }
 
