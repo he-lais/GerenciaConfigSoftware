@@ -38,7 +38,7 @@ function montarCorpoDaPagina(){
                             <h5 class="card-title">`+ dados[i].nome +`</h5>
                             <p class="card-text">`+dados[i].descricao+`</p>
                             <a href="#" class="btn btn-outline-danger" onClick="preencherDadosModalDetalhes(`+i+`)">
-                                <b>Leiamais...</b>
+                                <b>Leia mais...</b>
                             </a>
                         </div>
                     </div>
